@@ -25,27 +25,38 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => 'My Project',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
-            $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
-            ];
-            if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-            } else {
-                $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
+
+            if (Yii::$app->user->isGuest) 
+            {
+                $navItems=[
+                    ['label' => 'Acerca de', 'url' => ['/site/about']],
+                    ['label' => 'Contacto', 'url' => ['/site/about']],
+                    ['label' => 'Entrar', 'url' => ['/user/login']]
                 ];
+            }else 
+            {
+                $navItems=[
+                    ['label' => 'Inicio', 'url' => ['/site/index']],
+                    ['label' => 'Cuenta', 'url' => ['/user/settings/']],
+                    ['label' => 'Estatus', 'url' => ['/status/index']],
+                    ['label' => 'Acerca de', 'url' => ['/site/about']],
+                    ['label' => 'Contacto', 'url' => ['/site/about']],
+//                    ['label' => 'Crear Cuenta', 'url' => ['/user/register']]
+                ];
+                array_push($navItems,['label' => 'Salir (' . Yii::$app->user->identity->username . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']]
+                );
             }
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => $menuItems,
+                'items' => $navItems,
             ]);
             NavBar::end();
         ?>
@@ -60,8 +71,8 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-left">&copy; Ramon-Technology <?= date('Y') ?></p>
+        <!--<p class="pull-right"><?= Yii::powered() ?></p>-->
         </div>
     </footer>
 

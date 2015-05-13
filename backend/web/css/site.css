@@ -1,5 +1,6 @@
 html,
 body {
+    font-family: "Open Sans", sans-serif!important;
     height: 100%;
 }
 
@@ -88,4 +89,19 @@ a.desc:after {
     border-left: 3px solid #eed3d7;
     padding: 10px 20px;
     margin: 0 0 15px 0;
+}
+
+label {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.page-title {
+  padding: 0px;
+  font-size: 28px;
+  letter-spacing: -1px;
+  display: block;
+  color: #666;
+  margin: 0px 0px 15px 0px;
+  font-weight: 300;
 }
