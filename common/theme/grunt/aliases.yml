@@ -1,0 +1,7 @@
+default:
+    - 'concat'
+
+production:
+    - 'concat'
+    - 'uglify'
+    - 'cssmin'

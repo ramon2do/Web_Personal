@@ -1,0 +1,219 @@
+@import "_custom_variables";
+@import "_custom_plugins";
+
+/* mixins
+========== */
+.selected-module-border {border: 1px solid @selected-module-color !important;}
+
+/* general styling
+========== */
+
+.page-header .page-actions {
+  margin: 23px 0 15px 10px;
+  padding: 0;
+  float: left;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+
+.no-shadow {
+  box-shadow: none;
+}
+
+.page-content {
+  background-image: url('../img/bg/bg.png') !important;
+}
+
+.page-header {
+  .page-header-top {
+    .page-logo {
+      .logo-default{
+        width: 177px;
+        margin: 10px 10px 0 10px;
+      }
+    }
+  }
+}
+
+.mini-logo {
+  margin: -5px 0 0 0;
+  width: 30px;
+}
+
+/* blur modals
+========= */
+.modal-open #blur_modals{
+  -webkit-filter: blur(7px);
+  -moz-filter: blur(15px);
+  -o-filter: blur(15px);
+  -ms-filter: blur(15px);
+  filter: blur(15px);
+}
+
+.modal-backdrop {background: #f7f7f7;}
+
+.single-rules {
+  .checkbox {
+    margin-top: -11px;
+    display: inline-block;
+    font-size: 10px;
+  }
+}
+
+/* sortable
+========== */
+
+#sortable1, #sortable2 {
+  border: 1px solid #eee;
+  min-height: 140px;
+  padding: 10px;
+}
+
+.dd-list { 
+  display: block; 
+  position: relative; 
+  margin: 0; 
+  padding: 0; 
+  list-style: none;
+}
+
+.dd-item { 
+  display: block; 
+  position: relative; 
+  margin: 0; 
+  padding: 0; 
+  min-height: 20px; 
+  font-size: 13px; 
+  line-height: 20px; 
+}
+
+.dd-handle { 
+  display: block; 
+  height: 30px;
+  margin: 5px 0;
+  padding: 5px 10px; 
+  color: #333; 
+  text-decoration: none; 
+  font-weight: 400; 
+  border: 1px solid #ccc;
+  background: #fafafa;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  box-sizing: border-box; 
+  -moz-box-sizing: border-box;
+}
+
+.dd-hover > .dd-handle {background: #2ea8e5 !important;}
+
+/* sortable handles
+========== */
+.dd3-content { 
+  display: block; 
+  height: 30px; 
+  margin: 5px 0; 
+  padding: 5px 10px 5px 40px; 
+  color: #333; 
+  text-decoration: none; 
+  font-weight: 400; 
+  border: 1px solid #ccc;
+  background: #fafafa;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  box-sizing: border-box; 
+  -moz-box-sizing: border-box;
+  &:hover{color: #2ea8e5;}
+}
+
+.dd3-item > button {margin-left: 30px;}
+
+.dd3-handle { 
+  position: absolute; 
+  margin: 0; 
+  left: 0; 
+  top: 0;
+  width: 30px; 
+  text-indent: 100%; 
+  white-space: nowrap; 
+  overflow: hidden;
+  border: 1px solid #aaa;
+  background: #ddd;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  &:before {
+    content: '≡'; 
+    display: block; 
+    position: absolute; 
+    left: 0; 
+    top: 3px; 
+    width: 100%; 
+    text-align: center; 
+    text-indent: 0; 
+    color: #fff; 
+    font-size: 20px; 
+    font-weight: normal;
+  }
+  &:hover {background: #ddd;}
+}
+
+/* when sortable items are being dragged
+========== */
+.ui-sortable-helper {
+  .dd3-handle {
+    margin-top: 5px;
+    background: @selected-module-color;
+    .selected-module-border;
+  }
+  .dd3-content {
+    font-weight: 700;
+    color: @selected-module-color;
+    .selected-module-border;
+  }
+}
+
+.ui-sortable-placeholder {
+  height: 35px;
+  visibility: visible !important;
+  border: 1px dashed @blue-ribela;
+  &:before {
+    color: @blue-ribela;
+    font-weight: 400;
+    padding: 5px;
+    content: "Soltar aquí";
+  }
+}
+
+@media (max-width: 991px) {
+  .page-header {
+    .page-header-inner {
+      .page-logo {
+        .logo-default{
+          width: 130px;
+          margin: 15px 10px 0 10px;
+        }
+      }
+    }
+  }
+}
+
+
+//CCS PARA RIBELA
+
+.progress {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.centerRadio{
+    margin-left: 0px !important
+}
+
+.progress{
+    height:21px;
+}

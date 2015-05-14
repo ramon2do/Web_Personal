@@ -1,0 +1,13 @@
+{
+  "name": "Ribela",
+  "version": "0.0.5",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-concat": "~0.5.0",
+    "grunt-contrib-cssmin": "~0.10.0",
+    "grunt-contrib-uglify": "~0.6.0",
+    "grunt-newer": "^1.1.0",
+    "load-grunt-config": "^0.16.0",
+    "time-grunt": "^1.0.0"
+  }
+}

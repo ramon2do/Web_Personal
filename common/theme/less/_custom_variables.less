@@ -1,0 +1,34 @@
+/* bootstrap colors
+========== */
+@brand-primary: #6D9FBC;
+
+/* custom colors
+========== */
+@blue-ribela: #6c7a8d;
+@dark-blue-ribela: #628498;
+@light-grey: #f5f5f5;
+@selected-module-color: #83c5d1;
+
+/* custom buttons
+========= */
+.btn-ribela {
+    color: #fff;
+    background-color: @brand-primary;
+    border-color: @brand-primary;
+    .badge {
+        color: #fff;
+        background-color: @brand-primary;
+    }
+}
+.btn-ribela:hover,.btn-ribela:focus,.btn-ribela.focus,.btn-ribela:active,.btn-ribela.active,.open &>.dropdown-toggle.btn-ribela {
+    color: #fff;
+    background-color: @dark-blue-ribela;
+    border-color: @brand-primary;
+}
+.btn-ribela:active,.btn-ribela.active,.open &>.dropdown-toggle.btn-ribela {
+    background-image: none;
+}
+.btn-ribela.disabled,.btn-ribela[disabled],fieldset[disabled] .btn-ribela,.btn-ribela.disabled:hover,.btn-ribela[disabled]:hover,fieldset[disabled] .btn-ribela:hover,.btn-ribela.disabled:focus,.btn-ribela[disabled]:focus,fieldset[disabled] .btn-ribela:focus,.btn-ribela.disabled.focus,.btn-ribela[disabled].focus,fieldset[disabled] .btn-ribela.focus,.btn-ribela.disabled:active,.btn-ribela[disabled]:active,fieldset[disabled] .btn-ribela:active,.btn-ribela.disabled.active,.btn-ribela[disabled].active,fieldset[disabled] .btn-ribela.active {
+    background-color: @brand-primary;
+    border-color: @brand-primary;
+}

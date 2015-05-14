@@ -86,7 +86,10 @@ class FieldGenerator extends Component
             $input .= '<input type="email" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'">';
           break;
           case 'number':
-            $input .= '<input type="text" class="form-control mask_number mask_phone" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'">';
+            $input .= '<input type="text" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'">';
+          break;
+          case 'phone':
+            $input .= '<input type="text" data-inputmask="&quot;mask&quot;: &quot;(9999) 9999999&quot;" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'" data-mask>';
           break;
           case 'date':
             $input .= '<input type="text" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'">';
@@ -127,7 +130,7 @@ class FieldGenerator extends Component
             'corporate_email' => ['type'=>'email', 'class'=>'form-control'],
             'personal_address' => ['type'=>'textarea', 'rows'=>'4', 'cols'=>'50', 'class'=>'form-control'],
             'personal_skype' => ['type'=>'text', 'class'=>'form-control'],
-            'personal_phone' => ['type'=>'number', 'class'=>'form-control mask_number mask_phone'],
+            'personal_phone' => ['type'=>'phone', 'class'=>'form-control'],
             'personal_mobile_phone' => ['type'=>'number', 'class'=>'form-control'],
             'personal_email' => ['type'=>'email', 'class'=>'form-control'],
             'contact_person' => ['type'=>'text', 'class'=>'form-control'],

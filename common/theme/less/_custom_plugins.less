@@ -1,0 +1,205 @@
+/* uniform images
+========== */
+div.selector, div.selector span, div.checker span, div.radio span, div.uploader, div.uploader span.action, div.button, div.button span {
+  background-image: url("../../plugins/uniform/images/sprite.png") !important;
+}
+
+.highContrastDetect {
+  background: url("../../plugins/uniform/images/bg-input.png") repeat-x 0 0;
+}
+
+input.uniform-input,
+select.uniform-multiselect,
+textarea.uniform {
+  background: url("../../plugins/uniform/images/bg-input.png") repeat-x 0 0;
+}
+
+input.uniform-input.active,
+select.uniform-multiselect.active,
+textarea.uniform.active {
+  background: url("../../plugins/uniform/images/bg-input-focus.png") repeat-x 0 0;
+}
+
+/* select2 images
+========== */
+.select2-container {
+  .select2-choice {
+    abbr {
+      background: url('../../plugins/select2/images/select2.png') right top no-repeat;
+    }
+    .select2-arrow {
+      b {
+          background: url('../../plugins/select2/images/select2.png') no-repeat 0 1px;
+      }
+    }
+  }
+}
+
+.select2-search {
+  input {
+    background: #fff url('../../plugins/select2/images/select2.png') no-repeat 100% -22px;
+    background: url('../../plugins/select2/images/select2.png') no-repeat 100% -22px;
+    background: url('../../plugins/select2/images/select2.png') no-repeat 100% -22px;
+    background: url('../../plugins/select2/images/select2.png') no-repeat 100% -22px;
+    background: url('../../plugins/select2/images/select2.png') no-repeat 100% -22px;
+  }
+  input.select2-active {
+    background: #fff url('../../plugins/select2/images/select2-spinner.gif') no-repeat 100%;
+    background: url('../../plugins/select2/images/select2-spinner.gif') no-repeat 100%;
+    background: url('../../plugins/select2/images/select2-spinner.gif') no-repeat 100%;
+    background: url('../../plugins/select2/images/select2-spinner.gif') no-repeat 100%;
+    background: url('../../plugins/select2/images/select2-spinner.gif') no-repeat 100%;
+  }
+}
+
+html[dir="rtl"] .select2-search input {
+  background: #fff url('../../plugins/select2/images/select2.png') no-repeat -37px -22px;
+  background: url('../../plugins/select2/images/select2.png') no-repeat -37px -22px;
+  background: url('../../plugins/select2/images/select2.png') no-repeat -37px -22px;
+  background: url('../../plugins/select2/images/select2.png') no-repeat -37px -22px;
+  background: url('../../plugins/select2/images/select2.png') no-repeat -37px -22px;
+}
+
+.select2-more-results.select2-active {
+  background: #f4f4f4 url('../../plugins/select2/images/select2-spinner.gif') no-repeat 100%;
+}
+
+
+.select2-container-multi .select2-choices .select2-search-field input.select2-active {
+  background: #fff url('../../plugins/select2/images/select2-spinner.gif') no-repeat 100% !important;
+}
+
+.select2-search-choice-close {
+  background: url('../../plugins/select2/images/select2.png') right top no-repeat;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 2dppx)  {
+  .select2-search input,
+  .select2-search-choice-close,
+  .select2-container .select2-choice abbr,
+  .select2-container .select2-choice .select2-arrow b {
+    background-image: url('../../plugins/select2/images/select2x2.png') !important;
+  }
+}
+
+/* jstree images
+========== */
+#jstree-dnd.jstree-default .jstree-ok,
+#jstree-dnd.jstree-default .jstree-er {
+  background-image: url("../../plugins/jstree/32px.png");
+}
+
+.jstree-default .jstree-node,
+.jstree-default .jstree-icon {
+  background-image: url("../../plugins/jstree/32px.png");
+}
+
+.jstree-default > .jstree-container-ul .jstree-loading > .jstree-ocl {
+  background: url("../../plugins/jstree/../../plugins/jstree/throbber.gif") center center no-repeat;
+}
+
+.jstree-default .jstree-file {
+  background: url("../../plugins/jstree/32px.png") -100px -68px no-repeat;
+}
+
+.jstree-default .jstree-folder {
+  background: url("../../plugins/jstree/32px.png") -260px -4px no-repeat;
+}
+
+.jstree-default-small .jstree-node,
+.jstree-default-small .jstree-icon {
+  background-image: url("../../plugins/jstree/32px.png");
+}
+
+.jstree-default-small > .jstree-container-ul .jstree-loading > .jstree-ocl {
+  background: url("../../plugins/jstree/throbber.gif") center center no-repeat;
+}
+
+.jstree-default-small .jstree-file {
+  background: url("../../plugins/jstree/32px.png") -103px -71px no-repeat;
+}
+
+.jstree-default-small .jstree-folder {
+  background: url("../../plugins/jstree/32px.png") -263px -7px no-repeat;
+}
+
+.jstree-default-large .jstree-node,
+.jstree-default-large .jstree-icon {
+  background-image: url("../../plugins/jstree/32px.png");
+}
+
+.jstree-default-large > .jstree-container-ul .jstree-loading > .jstree-ocl {
+  background: url("../../plugins/jstree/throbber.gif") center center no-repeat;
+}
+
+.jstree-default-large .jstree-file {
+  background: url("../../plugins/jstree/32px.png") -96px -64px no-repeat;
+}
+
+.jstree-default-large .jstree-folder {
+  background: url("../../plugins/jstree/32px.png") -256px 0px no-repeat;
+}
+
+@media (max-width: 768px) {
+
+  .jstree-default-responsive .jstree-icon {
+    background-image: url("../../plugins/jstree/40px.png");
+  }
+
+  .jstree-default-responsive .jstree-node,
+  .jstree-default-responsive .jstree-icon,
+  .jstree-default-responsive .jstree-node > .jstree-ocl,
+  .jstree-default-responsive .jstree-themeicon,
+  .jstree-default-responsive .jstree-checkbox {
+    background-image: url("../../plugins/jstree/40px.png");
+  }
+
+  .jstree-default-responsive .jstree-file {
+    background: url("../../plugins/jstree/40px.png") 0 -160px no-repeat;
+  }
+  .jstree-default-responsive .jstree-folder {
+    background: url("../../plugins/jstree/40px.png") -40px -40px no-repeat;
+  }
+
+}
+
+/* Dropzone image
+========== */
+
+.dropzone .dz-default.dz-message {
+  background-image: url("../../plugins/dropzone/images/spritemap.png");
+}
+
+@media all and (-webkit-min-device-pixel-ratio:1.5),(min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:1.5/1),(min-device-pixel-ratio:1.5),(min-resolution:138dpi),(min-resolution:1.5dppx) {
+  .dropzone .dz-default.dz-message {
+    background-image: url("../../plugins/dropzone/images/spritemap@2x.png");
+  }
+}
+
+.dropzone .dz-preview .dz-error-mark,
+.dropzone-previews .dz-preview .dz-error-mark,
+.dropzone .dz-preview .dz-success-mark,
+.dropzone-previews .dz-preview .dz-success-mark {
+  background-image: url("../../plugins/dropzone/images/spritemap.png");
+}
+
+@media all and (-webkit-min-device-pixel-ratio:1.5),(min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:1.5/1),(min-device-pixel-ratio:1.5),(min-resolution:138dpi),(min-resolution:1.5dppx) {
+  .dropzone .dz-preview .dz-error-mark,
+  .dropzone-previews .dz-preview .dz-error-mark,
+  .dropzone .dz-preview .dz-success-mark,
+  .dropzone-previews .dz-preview .dz-success-mark {
+    background-image: url("../../plugins/dropzone/images/spritemap@2x.png");
+  }
+}
+
+.dropzone .dz-preview .dz-progress .dz-upload,
+.dropzone-previews .dz-preview .dz-progress .dz-upload {
+  background-image: url("../../plugins/dropzone/images/spritemap.png");
+}
+
+@media all and (-webkit-min-device-pixel-ratio:1.5),(min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:1.5/1),(min-device-pixel-ratio:1.5),(min-resolution:138dpi),(min-resolution:1.5dppx) {
+  .dropzone .dz-preview .dz-progress .dz-upload,
+  .dropzone-previews .dz-preview .dz-progress .dz-upload {
+    background-image: url("../../plugins/dropzone/images/spritemap@2x.png");
+  }
+}

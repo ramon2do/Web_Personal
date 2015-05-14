@@ -77,6 +77,12 @@ AppAsset::register($this);
     </footer>
 
     <?php $this->endBody() ?>
+    <script>
+    jQuery(document).ready(function() {    
+       $APP.UI.init();//js de ribela
+    });
+    </script>
+    <!-- END JAVASCRIPTS --> 
 </body>
 </html>
 <?php $this->endPage() ?>
