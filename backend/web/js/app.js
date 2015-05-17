@@ -6698,6 +6698,7 @@ $APP.UI = (function() {
     function _showModal()
     {
         var modal = $('#modal');
+        modal.find('#modalContent').html('');
         $('a.modal-show').bind('click', function(e){
             e.preventDefault();
             modal.modal('show').find('#modalContent').load($(this).attr('href'));
