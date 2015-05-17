@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "account".
@@ -25,7 +26,10 @@ class Account extends \yii\db\ActiveRecord
      * @inheritdoc
      */
     public $name_identity;
-    
+    public $name_profile;
+    public $rol;
+    public $file;
+
     public static function tableName()
     {
         return 'account';
@@ -40,6 +44,7 @@ class Account extends \yii\db\ActiveRecord
             [['profile', 'contact'], 'string'],
             [['company_id', 'user_id', 'rol_id'], 'integer'],
             [['create_date'], 'required'],
+            [['file'], 'file'],
             [['create_date'], 'safe']
         ];
     }
@@ -51,12 +56,13 @@ class Account extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'profile' => 'Profile',
-            'contact' => 'Contact',
-            'company_id' => 'Company ID',
-            'user_id' => 'User ID',
-            'rol_id' => 'Rol ID',
-            'create_date' => 'Create Date',
+            'profile' => 'Perfil',
+            'contact' => 'Contacto',
+            'company_id' => 'Compañia',
+            'user_id' => 'Usuario',
+            'rol_id' => 'Rol',
+            'create_date' => 'Creación',
+            'file' => 'Archivo',
         ];
     }
 
@@ -84,12 +90,29 @@ class Account extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
     
-    public function getArrayAccount($post)
+    public function getArrayAccount($post,$model=NULL)
     {
         $array = [];
-        $array['Account']['profile'] = Yii::$app->json_manager->getJsonProfile($post['Profile']);
-        $array['Account']['contact'] = Yii::$app->json_manager->getJsonContact($post['Contact']);
-        $array['Account']['company_id'] = NULL;
+        $profile_json = NULL;
+        $contact_json = NULL;
+        if($model != NULL)
+        {
+            $profile_json = $model->profile;
+            $contact_json = $model->contact;
+        }
+        $array['Account']['profile'] = Yii::$app->json_manager->getJsonProfile($post['Profile'],$profile_json);
+        $array['Account']['contact'] = Yii::$app->json_manager->getJsonContact($post['Contact'],$contact_json);
+        if(isset($post['Account']['company_id']) && $post['Account']['company_id'] != ''){
+            $array['Account']['company_id'] = $post['Account']['company_id'];
+        }
+        if(isset($post['Account']['rol_id']) && $post['Account']['rol_id'] != ''){
+            $array['Account']['rol_id'] = $post['Account']['rol_id'];
+        }
         return $array;
+    }
+    
+    public function getAvatar($id) 
+    {
+        if(file_exists(\Yii::getAlias('@webroot').'/img/avatar/'.$id.'.png')){return '/img/avatar/'.$id.'.png';}else{return '/img/avatar/avatar-tiny.jpg';}
     }
 }

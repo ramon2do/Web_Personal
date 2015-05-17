@@ -27,6 +27,9 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 10;
 
     public $name_identity;
+    public $name_profile;
+    public $avatar;
+    public $menu;
     /**
      * @inheritdoc
      */

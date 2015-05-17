@@ -27,7 +27,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
             ]
         ],
         'urlManagerFrontEnd' => [
@@ -39,6 +40,7 @@ return [
         'user' => [
             'identityClass' => 'dektrium\user\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['user/login'],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

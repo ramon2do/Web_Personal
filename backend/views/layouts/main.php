@@ -4,11 +4,14 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use yii\bootstrap\Modal;
+use yii\widgets\Pjax;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -24,48 +27,62 @@ AppAsset::register($this);
     <?php $this->beginBody() ?>
     <div class="wrap">
         <?php
-            NavBar::begin([
-                'brandLabel' => 'My Project',
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
-                ],
-            ]);
-
-            if (Yii::$app->user->isGuest) 
-            {
-                $navItems=[
-                    ['label' => 'Acerca de', 'url' => ['/site/about']],
-                    ['label' => 'Contacto', 'url' => ['/site/about']],
-                    ['label' => 'Entrar', 'url' => ['/user/login']]
-                ];
-            }else 
-            {
-                $navItems=[
-                    ['label' => 'Inicio', 'url' => ['/site/index']],
-                    ['label' => 'Cuenta', 'url' => ['/user/settings/']],
-                    ['label' => 'Estatus', 'url' => ['/status/index']],
-                    ['label' => 'Acerca de', 'url' => ['/site/about']],
-                    ['label' => 'Contacto', 'url' => ['/site/about']],
-//                    ['label' => 'Crear Cuenta', 'url' => ['/user/register']]
-                ];
-                array_push($navItems,['label' => 'Salir (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']]
-                );
-            }
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => $navItems,
-            ]);
-            NavBar::end();
+//            NavBar::begin([
+//                'brandLabel' => 'My Project',
+//                'brandUrl' => Yii::$app->homeUrl,
+//                'options' => [
+//                    'class' => 'navbar-inverse navbar-fixed-top',
+//                ],
+//            ]);
+//
+//            if (Yii::$app->user->isGuest) 
+//            {
+//                $navItems=[
+//                    ['label' => 'Acerca de', 'url' => ['/site/about']],
+//                    ['label' => 'Contacto', 'url' => ['/site/about']],
+//                    ['label' => 'Entrar', 'url' => ['/user/login']]
+//                ];
+//            }else 
+//            {
+//                $navItems=[
+//                    ['label' => 'Inicio', 'url' => ['/site/index']],
+//                    ['label' => 'Cuenta', 'url' => ['/user/settings/']],
+//                    ['label' => 'Estatus', 'url' => ['/status/index']],
+//                    ['label' => 'Acerca de', 'url' => ['/site/about']],
+//                    ['label' => 'Contacto', 'url' => ['/site/about']],
+////                    ['label' => 'Crear Cuenta', 'url' => ['/user/register']]
+//                ];
+//                array_push($navItems,['label' => 'Salir (' . Yii::$app->user->identity->username . ')',
+//                    'url' => ['/site/logout'],
+//                    'linkOptions' => ['data-method' => 'post']]
+//                );
+//            }
+//            echo Nav::widget([
+//                'options' => ['class' => 'navbar-nav navbar-right'],
+//                'items' => $navItems,
+//            ]);
+//            NavBar::end();
         ?>
 
         <div class="container">
+          
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= $content ?>
+        <?php Pjax::begin(['enablePushState' => false]); ?>    
+        <?php
+            Modal::begin([
+                'header' => '<h4 class="box-title">Cuenta Detalle</h4>',
+                'id' => 'modal',
+                'size' => 'modal-lg',
+                'options' => [
+                ],
+            ]);
+            echo '<div id="modalContent"></div>';
+            Modal::end();
+        ?>      
+        <?php Pjax::end(); ?>    
         </div>
     </div>
 

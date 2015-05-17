@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "rol".
@@ -44,7 +45,7 @@ class Rol extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Rol',
             'menu' => 'Menu',
             'create_date' => 'Create Date',
         ];
@@ -56,5 +57,12 @@ class Rol extends \yii\db\ActiveRecord
     public function getAccounts()
     {
         return $this->hasMany(Account::className(), ['rol_id' => 'id']);
+    }
+    
+    public function getListRol() 
+    {
+        $rol = self::find()->all();
+        $listData = ArrayHelper::map($rol,'id','name');
+        return $listData;
     }
 }

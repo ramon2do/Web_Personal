@@ -7,6 +7,8 @@ module.exports = {
 //            'assets/global/plugins/bootstrap/js/bootstrap.min.js',
 //            'assets/global/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js',
             'assets/global/plugins/morris/morris.min.js',
+            'assets/global/plugins/datatables/jquery.dataTables.min.js',
+            'assets/global/plugins/datatables/dataTables.bootstrap.min.js',
             'assets/global/plugins/sparkline/jquery.sparkline.min.js',
             'assets/global/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js',
             'assets/global/plugins/jvectormap/jquery-jvectormap-world-mill-en.js',
@@ -33,6 +35,7 @@ module.exports = {
     appcss: {
         src: [
             'assets/global/bootstrap/css/bootstrap.min.css',
+            'assets/global/plugins/datatables/dataTables.bootstrap.css',
             'assets/global/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css',
             'assets/global/dist/css/AdminLTE.min.css',
             'assets/global/dist/css/skins/_all-skins.min.css',

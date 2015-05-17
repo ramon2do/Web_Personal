@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Component;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\jui\DatePicker;
 
 class FieldGenerator extends Component
 {
@@ -92,7 +93,18 @@ class FieldGenerator extends Component
             $input .= '<input type="text" data-inputmask="&quot;mask&quot;: &quot;(9999) 9999999&quot;" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'" data-mask>';
           break;
           case 'date':
-            $input .= '<input type="text" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'">';
+              $input .= DatePicker::widget([
+                            'name' => $modelGeneric.'['.$attribute.']',
+                            'id' => strtolower($modelGeneric).'-'.$attribute,
+                            'value' => $setValue,
+                            'dateFormat' => 'dd-MM-yyyy',
+                            'language' => 'es',
+                            'options' => [
+                                'class' => 'form-control',
+                                'readonly' => 'readonly',
+                            ]
+                        ]);
+//            $input .= '<input type="text" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'">';
           break;
           case 'textarea':
             $input .= '<textarea id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']">'.$setValue.'</textarea>';
@@ -113,13 +125,16 @@ class FieldGenerator extends Component
         $field_list_values = ['text'=>'Campo Texto','number'=>'Campo Numerico','phone'=>'Campo Telefónico','email'=>'Campo Email','date'=>'Campo Fecha','ip'=>'Campo IP','textarea'=>'Area de Texto','list'=>'Lista Desplegable'];
         $field_list_nationality = ['Venezolano','Estadounidese','Argentina','Peruana','Colombiana','Cubana','Mexicana','Canadiense','Española','Italiana','Francesa','Alemana','Portuguesa','Brasilera','Chileno','Austriaco'];
         $field_list_gender = ['Female' => 'Femenino', 'Male' => 'Masculino'];
+        $field_list_company_sector = ['pubc' => 'Público', 'prvd' => 'Privado'];
+        $field_list_company_activity = ['inds' => 'Industrial', 'comr' => 'Comercial', 'sevc' => 'De Servicios'];
+        $field_list_company_geoambit = ['locl' => 'Local', 'nacl' => 'Nacional', 'comu' => 'Comunitario', 'muln' => 'Multinacional'];
         $fields = [
             'identification' => ['type'=>'text', 'class'=>'form-control', 'required'=>'required'],
             'first_name' => ['type'=>'text', 'class'=>'form-control'],
             'second_name' => ['type'=>'text', 'class'=>'form-control'],
             'first_surname' => ['type'=>'text', 'class'=>'form-control'],
             'second_surname' => ['type'=>'text', 'class'=>'form-control'],
-            'gender' => ['type'=>'list', 'class'=>'form-control select2me', 'values'=>$field_list_gender],
+            'gender' => ['type'=>'list', 'class'=>'form-control', 'values'=>$field_list_gender],
             'birth_date' => ['type'=>'date', 'class'=>'form-control form-control-inline input-medium date-picker'],
             'nacionality' => ['type'=>'list', 'class'=>'form-control', 'values'=>$field_list_nationality],
             'corporate_address' => ['type'=>'textarea', 'rows'=>'4', 'cols'=>'50', 'class'=>'form-control'],
@@ -134,11 +149,14 @@ class FieldGenerator extends Component
             'personal_mobile_phone' => ['type'=>'number', 'class'=>'form-control'],
             'personal_email' => ['type'=>'email', 'class'=>'form-control'],
             'contact_person' => ['type'=>'text', 'class'=>'form-control'],
-            'contact_method' => ['type'=>'list', 'class'=>'form-control select2me', 'values'=>['Teléfono','Correo Electrónico','']],
+            'contact_method' => ['type'=>'list', 'class'=>'form-control', 'values'=>['Teléfono','Correo Electrónico','']],
             'contact_device' => ['type'=>'text', 'class'=>'form-control'],
             'field_name' => ['type'=>'text', 'class'=>'form-control'],
-            'field_type' => ['type'=>'list', 'class'=>'form-control select2me', 'values'=>$field_list_values],
-            'field_values' => ['type'=>'text', 'class'=>'form-control tags'],  
+            'field_type' => ['type'=>'list', 'class'=>'form-control', 'values'=>$field_list_values],
+            'field_values' => ['type'=>'text', 'class'=>'form-control tags'], 
+            'list_sector' => ['type'=>'list', 'class'=>'form-control', 'values'=>$field_list_company_sector],
+            'list_activity' => ['type'=>'list', 'class'=>'form-control', 'values'=>$field_list_company_activity],
+            'list_geoambit' => ['type'=>'list', 'class'=>'form-control', 'values'=>$field_list_company_geoambit],
         ];
         return $fields[$attribute];
   }
@@ -155,14 +173,14 @@ class FieldGenerator extends Component
       'birth_date' => 'Fecha de Nacimiento',
       'nacionality' => 'Nacionalidad',
       'corporate_phone' => 'Teléfono Corporativo',
-      'corporate_mobile_phone' => 'Teléfono móvil Corporativo',
+      'corporate_mobile_phone' => 'Teléfono Móvil Corporativo',
       'corporate_skype' => 'Skype Corporativo',
-      'corporate_email' => 'Correo electrónico Corporativo',
-      'corporate_address' => 'Dirección corporativa',
+      'corporate_email' => 'Correo Electrónico Corporativo',
+      'corporate_address' => 'Dirección Corporativa',
       'personal_phone' => 'Teléfono Personal',
-      'personal_mobile_phone' => 'Teléfono móvil Personal',
+      'personal_mobile_phone' => 'Teléfono Móvil Personal',
       'personal_skype' => 'Skype Personal',
-      'personal_email' => 'Correo electrónico Personal',
+      'personal_email' => 'Correo Electrónico Personal',
       'personal_address' => 'Dirección Personal',
       'contact_person' => 'Nombre de la Persona de Contacto',
       'contact_method' => 'Medio de Comunicación',
@@ -170,7 +188,10 @@ class FieldGenerator extends Component
       'field_name' => 'Nombre del Campo',
       'field_type' => 'Tipo de Campo',
       'field_values' => 'Valores',
+      'list_sector' => 'Sector',
+      'list_activity' => 'Actividad Laboral',
+      'list_geoambit' =>  'Ambito Geografico',
     ];
-    return $label[$attribute];
+    if(isset($label[$attribute])){return $label[$attribute];}else{return 'Campo sin Nombre';}
   }
 }

@@ -17,14 +17,18 @@ class Constant extends Component
         $id = \Yii::$app->user->identity->getId();
         try {
             $sql = "SELECT (CASE 
-                                WHEN r.name = 'store' 
-                                    THEN c.name 
-                                ELSE (CASE
-                                           WHEN a.profile::text <> '{}'::text
-                                                THEN ((a.profile->>'first_name') || ' ' || (a.profile->>'first_surname'))
-                                           ELSE u.username    
-                                      END) 
-                            END) as name_identity
+                                WHEN r.id = 3 
+                                    THEN coalesce(c.name, 'Sin Nombre')
+                                ELSE 
+                                    u.username
+                            END) as name_identity,
+                    (CASE
+                       WHEN a.profile::text <> '{}'::text
+                            THEN ((a.profile->>'first_name') || ' ' || (a.profile->>'first_surname'))
+                       ELSE u.username    
+                    END) as name_profile,     
+                    a.id,  
+                    coalesce(r.id::text, 'Empty') as rol        
                     FROM account a
                     LEFT JOIN company c ON c.id = a.company_id
                     INNER JOIN rol r ON r.id = a.rol_id
@@ -33,7 +37,13 @@ class Constant extends Component
             $model = Account::findBySql($sql)->one();
             if($model != NULL)
             {
+                if($model->rol == 'Empty'){$rol = 'general';}else{$rol = $model->rol;}
+                $menu = Yii::$app->json_manager->getMenuJsonByRol($rol);
+                $avatar = $model->getAvatar($model->id);
                 Yii::$app->session->set('user.name_identity',$model->name_identity);
+                Yii::$app->session->set('user.name_profile',$model->name_profile);
+                Yii::$app->session->set('user.avatar',$avatar);
+                Yii::$app->session->set('user.menu',$menu);
                 return true;
             }else{return false;}
         } catch (Exception $exc) {
