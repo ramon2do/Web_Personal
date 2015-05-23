@@ -1,3 +1,7 @@
+.btn {
+    border-radius: 25px !important;
+}
+
 .user-image{
     float: left;
     width: 25px;
@@ -5,4 +9,185 @@
     border-radius: 50%;
     margin-right: 10px;
     margin-top: -2px;
+}
+
+.form-control {
+  border-radius: 25px !important;
+}
+
+.main-sidebar {
+  margin-top: 50px;
+}
+
+.profile-sidebar {
+  float: left;
+  width: 300px;
+  margin-right: 20px;
+}
+
+.portlet.light {
+  padding: 12px 20px 15px 20px;
+  background-color: #fff;
+}
+
+.profile-sidebar-portlet {
+  padding: 30px 0 0 0 !important;
+}
+
+.portlet {
+  margin-top: 0px;
+  margin-bottom: 25px;
+  padding: 0px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.profile-sidebar-portlet {
+  padding: 30px 0 0 0 !important;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profile-usermenu {
+  margin-top: 30px;
+  padding-bottom: 20px;
+}
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+  border: 3px solid;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+img {
+  vertical-align: middle;
+  border: 0;
+}
+
+.profile-content {
+  overflow: hidden;
+}
+
+.list-separated {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.profile-stat {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f4f7;
+}
+
+.profile-desc-title {
+  color: #7f90a4;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.profile-desc-text {
+  color: #7e8c9e;
+  font-size: 14px;
+}
+
+.profile-stat-title {
+  color: #7f90a4;
+  font-size: 25px;
+  text-align: center;
+}
+
+.profile-stat-text {
+  color: #5b9bd1;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.profile-usertitle-name {
+  color: #3c8dbc;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #333;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 7px;
+}
+
+ul.simplePagerNav {
+    margin-top: 10px;
+    -webkit-padding-start: 0px;
+}
+
+li.currentPage {
+    z-index: 2;
+    color: #23527c;
+    cursor: default;
+    background-color: #337ab7 !important;
+    border-color: #337ab7 !important;
+}
+
+ul.simplePagerNav li{
+    display:block;
+    float: left;
+    padding: 10px;
+    /*margin-bottom: 10px;*/
+    padding: 6px 12px;
+    color: #23527c;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+ul.simplePagerNav li a{
+    color: #333;
+    text-decoration: none;
+}
+
+ul.simplePagerNav li.currentPage a {
+	color: #fff;	
+}
+
+@media (max-width: 991px){
+    .profile-sidebar {
+        float: none;
+        width: 100% !important;
+        margin: 0;
+    }
+    .profile-content {
+        overflow: visible;
+    }
+    .profile-sidebar > .portlet {
+        margin-bottom: 20px;
+    }
+    .sidebar-collapse .main-sidebar, .sidebar-collapse .left-side {
+        -webkit-transform: translate(-230px, 0);
+        -ms-transform: translate(-230px, 0);
+        -o-transform: translate(-230px, 0);
+        transform: translate(-230px, 0); 
+    }
 }

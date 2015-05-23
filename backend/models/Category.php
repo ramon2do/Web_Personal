@@ -9,9 +9,12 @@ use Yii;
  *
  * @property integer $id
  * @property string $name
+ * @property string $description
+ * @property integer $type_id
  * @property string $create_date
  *
- * @property Item[] $items
+ * @property Type $type
+ * @property SubCategory[] $subCategories
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -29,7 +32,9 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'create_date'], 'required'],
+            [['name', 'type_id', 'create_date'], 'required'],
+            [['description'], 'string'],
+            [['type_id'], 'integer'],
             [['create_date'], 'safe'],
             [['name'], 'string', 'max' => 255]
         ];
@@ -42,16 +47,26 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'create_date' => 'Create Date',
+            'name' => 'Nombre',
+            'description' => 'Descripción',
+            'type_id' => 'Tipo',
+            'create_date' => 'Creación',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getItems()
+    public function getType()
     {
-        return $this->hasMany(Item::className(), ['category_id' => 'id']);
+        return $this->hasOne(Type::className(), ['id' => 'type_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSubCategories()
+    {
+        return $this->hasMany(SubCategory::className(), ['id_category' => 'id']);
     }
 }

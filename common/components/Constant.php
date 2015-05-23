@@ -28,7 +28,9 @@ class Constant extends Component
                        ELSE u.username    
                     END) as name_profile,     
                     a.id,  
-                    coalesce(r.id::text, 'Empty') as rol        
+                    coalesce(c.id::text, 'Empty') as company_id,
+                    coalesce(r.id::text, 'Empty') as rol,
+                    coalesce(r.name, 'Empty') as rol_name
                     FROM account a
                     LEFT JOIN company c ON c.id = a.company_id
                     INNER JOIN rol r ON r.id = a.rol_id
@@ -42,6 +44,8 @@ class Constant extends Component
                 $avatar = $model->getAvatar($model->id);
                 Yii::$app->session->set('user.name_identity',$model->name_identity);
                 Yii::$app->session->set('user.name_profile',$model->name_profile);
+                Yii::$app->session->set('user.rol_name',$model->rol_name);
+                Yii::$app->session->set('user.company_id',$model->company_id);
                 Yii::$app->session->set('user.avatar',$avatar);
                 Yii::$app->session->set('user.menu',$menu);
                 return true;

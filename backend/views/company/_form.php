@@ -9,15 +9,14 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="company-form">
-    <?php $form = ActiveForm::begin([
-        'enableAjaxValidation' => false,
-        'enableClientValidation' => true,
-    ]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true ]]); ?>
     <div class="form-body">
         <div class="col-md-6">
-          <?= Yii::$app->field_generator->genStaticInput($model,['list_sector','list_activity','list_geoambit'],'Company_Type') ?>  
-          <?= $form->field($model, 'code')->textInput(['maxlength' => true, 'readonly' => 'readonly']) ?>
-          <?= Html::activeHiddenInput($model, 'code_number', ['disabled' => 'disabled']) ?>  
+          <?php if($model->isNewRecord && Yii::$app->session->get('user.name_profile') == 'Administrador'){ ?>  
+              <?= Yii::$app->field_generator->genStaticInput($model,['list_sector','list_activity','list_geoambit'],'Company_Type','valueOfSameModel') ?>  
+              <?= $form->field($model, 'code')->textInput(['maxlength' => true, 'readonly' => 'readonly']) ?>
+              <?= Html::activeHiddenInput($model, 'code_number', ['disabled' => 'disabled']) ?>  
+          <?php } ?>  
           <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-6">

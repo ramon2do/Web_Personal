@@ -7,10 +7,11 @@ use yii\base\Component;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\jui\DatePicker;
+use yii\helpers\ArrayHelper;
 
 class FieldGenerator extends Component
 {
-  public function genStaticInput($model,$array,$modelGeneric=NULL) 
+  public function genStaticInput($model,$array,$modelGeneric=NULL,$valuePath=NULL) 
   {
     $content = $optionsInput = NULL;
     foreach ($array as $key => $attribute) 
@@ -24,8 +25,7 @@ class FieldGenerator extends Component
           $required = NULL;
           if(is_null($modelGeneric)){$modelGeneric=get_class($model);}
           $input = $this->genStaticField($attribute,$modelGeneric);
-          if(!$model->isNewRecord){$setValue = $this->getValuesInModel($model,$modelGeneric,$attribute);}
-
+          if(!$model->isNewRecord){$setValue = $this->getValuesInModel($model,$modelGeneric,$attribute,$valuePath);}
           foreach ($input as $keyOption => $option) {
               if($keyOption == 'type'){$type = $option;}
               elseif($keyOption == 'values'){$arrayValues = $option;}
@@ -44,16 +44,24 @@ class FieldGenerator extends Component
     return $content;
   }
   
-  public function getValuesInModel($model,$modelGeneric,$attribute) 
+  public function getValuesInModel($model,$modelGeneric,$attribute,$valuePath=NULL) 
   {
       if(get_class($model) != $modelGeneric)
       {
-          $field = strtolower($modelGeneric);
-          if(isset($model->$field))
+          if($valuePath == NULL)
           {
-              $json = Json::decode($model->$field);
-              return $json[$attribute];
-          }else{return '';}
+              $field = strtolower($modelGeneric);
+              if(isset($model->$field))
+              {
+                  $json = Json::decode($model->$field);
+                  return $json[$attribute];
+              }else{return '';}
+          }
+          elseif($valuePath == 'valueOfSameModel')
+          {
+              if(isset($model->$attribute)){return $model->$attribute;}else{return '';}
+          }
+          else{return '';}
       }else{return '';}
   }
   
@@ -90,7 +98,7 @@ class FieldGenerator extends Component
             $input .= '<input type="text" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'">';
           break;
           case 'phone':
-            $input .= '<input type="text" data-inputmask="&quot;mask&quot;: &quot;(9999) 9999999&quot;" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'" data-mask>';
+            $input .= '<input type="text" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'">';
           break;
           case 'date':
               $input .= DatePicker::widget([
@@ -102,7 +110,11 @@ class FieldGenerator extends Component
                             'options' => [
                                 'class' => 'form-control',
                                 'readonly' => 'readonly',
-                            ]
+                            ],
+                            'clientOptions' => [
+//                                'autoclose' => true,
+                                'format' => 'dd, MM yyyy',
+                            ],
                         ]);
 //            $input .= '<input type="text" id="'.strtolower($modelGeneric).'-'.$attribute.'" '.$optionsInput.' name="'.$modelGeneric.'['.$attribute.']" value="'.$setValue.'">';
           break;
@@ -130,23 +142,23 @@ class FieldGenerator extends Component
         $field_list_company_geoambit = ['locl' => 'Local', 'nacl' => 'Nacional', 'comu' => 'Comunitario', 'muln' => 'Multinacional'];
         $fields = [
             'identification' => ['type'=>'text', 'class'=>'form-control', 'required'=>'required'],
-            'first_name' => ['type'=>'text', 'class'=>'form-control'],
-            'second_name' => ['type'=>'text', 'class'=>'form-control'],
-            'first_surname' => ['type'=>'text', 'class'=>'form-control'],
-            'second_surname' => ['type'=>'text', 'class'=>'form-control'],
+            'first_name' => ['type'=>'text', 'class'=>'form-control only-string'],
+            'second_name' => ['type'=>'text', 'class'=>'form-control only-string'],
+            'first_surname' => ['type'=>'text', 'class'=>'form-control only-string'],
+            'second_surname' => ['type'=>'text', 'class'=>'form-control only-string'],
             'gender' => ['type'=>'list', 'class'=>'form-control', 'values'=>$field_list_gender],
             'birth_date' => ['type'=>'date', 'class'=>'form-control form-control-inline input-medium date-picker'],
             'nacionality' => ['type'=>'list', 'class'=>'form-control', 'values'=>$field_list_nationality],
             'corporate_address' => ['type'=>'textarea', 'rows'=>'4', 'cols'=>'50', 'class'=>'form-control'],
             'personal_address' => ['type'=>'textarea', 'rows'=>'4', 'cols'=>'50', 'class'=>'form-control'],
             'corporate_skype' => ['type'=>'text', 'class'=>'form-control'],
-            'corporate_phone' => ['type'=>'number', 'class'=>'form-control'],
-            'corporate_mobile_phone' => ['type'=>'number', 'class'=>'form-control'],
+            'corporate_phone' => ['type'=>'number', 'class'=>'form-control telephone'],
+            'corporate_mobile_phone' => ['type'=>'number', 'class'=>'form-control phone'],
             'corporate_email' => ['type'=>'email', 'class'=>'form-control'],
             'personal_address' => ['type'=>'textarea', 'rows'=>'4', 'cols'=>'50', 'class'=>'form-control'],
             'personal_skype' => ['type'=>'text', 'class'=>'form-control'],
-            'personal_phone' => ['type'=>'phone', 'class'=>'form-control'],
-            'personal_mobile_phone' => ['type'=>'number', 'class'=>'form-control'],
+            'personal_phone' => ['type'=>'phone', 'class'=>'form-control telephone'],
+            'personal_mobile_phone' => ['type'=>'number', 'class'=>'form-control phone'],
             'personal_email' => ['type'=>'email', 'class'=>'form-control'],
             'contact_person' => ['type'=>'text', 'class'=>'form-control'],
             'contact_method' => ['type'=>'list', 'class'=>'form-control', 'values'=>['Teléfono','Correo Electrónico','']],
@@ -193,5 +205,12 @@ class FieldGenerator extends Component
       'list_geoambit' =>  'Ambito Geografico',
     ];
     if(isset($label[$attribute])){return $label[$attribute];}else{return 'Campo sin Nombre';}
+  }
+  
+  public function genArrayList($model,$id,$option,$filter=NULL) 
+  {
+    if($filter != NULL){$data = $model::find()->where($filter)->all();}else{$data = $model::find()->all();}  
+    $listData = ArrayHelper::map($data,$id,$option);
+    return $listData;
   }
 }

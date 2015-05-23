@@ -28,6 +28,8 @@ class User extends ActiveRecord implements IdentityInterface
 
     public $name_identity;
     public $name_profile;
+    public $rol_name;
+    public $company_id;
     public $avatar;
     public $menu;
     /**

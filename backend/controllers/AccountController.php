@@ -83,12 +83,11 @@ class AccountController extends Controller
     {
         $model = new Account;
         $modelUser = \Yii::createObject(RegistrationForm::className());
-        $this->performAjaxValidation($modelUser);
         $modelRol = new Rol;
         $modelCompany = new Company;
 
-        $rol = $modelRol->getListRol();
-        $company = $modelCompany->getListCompany();
+        $rol = Yii::$app->field_generator->genArrayList($modelRol,'id','name');
+        $company = Yii::$app->field_generator->genArrayList($modelCompany,'id','name');
 
         if(Yii::$app->request->post())
         {
@@ -140,8 +139,8 @@ class AccountController extends Controller
         $modelRol = new Rol;
         $modelCompany = new Company;
 
-        $rol = $modelRol->getListRol();
-        $company = $modelCompany->getListCompany();
+        $rol = Yii::$app->field_generator->genArrayList($modelRol,'id','name');
+        $company = Yii::$app->field_generator->genArrayList($modelCompany,'id','name');
         
         if(Yii::$app->request->post())
         {

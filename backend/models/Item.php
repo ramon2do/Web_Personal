@@ -10,16 +10,16 @@ use Yii;
  * @property integer $id
  * @property string $name
  * @property string $description
- * @property string $photo
  * @property integer $company_id
- * @property integer $category_id
+ * @property integer $subcategory_id
+ * @property string $photo
  * @property boolean $active
  * @property string $disable_date
  * @property string $create_date
  *
  * @property Inventory[] $inventories
- * @property Category $category
  * @property Company $company
+ * @property SubCategory $subcategory
  */
 class Item extends \yii\db\ActiveRecord
 {
@@ -37,9 +37,9 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'company_id', 'category_id', 'create_date'], 'required'],
+            [['name', 'company_id', 'subcategory_id', 'create_date'], 'required'],
             [['description', 'photo'], 'string'],
-            [['company_id', 'category_id'], 'integer'],
+            [['company_id', 'subcategory_id'], 'integer'],
             [['active'], 'boolean'],
             [['disable_date', 'create_date'], 'safe'],
             [['name'], 'string', 'max' => 255]
@@ -53,14 +53,14 @@ class Item extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
+            'name' => 'Nombre',
+            'description' => 'Descripción',
+            'company_id' => 'Compañia',
+            'subcategory_id' => 'Subcategoría',
             'photo' => 'Photo',
-            'company_id' => 'Company ID',
-            'category_id' => 'Category ID',
-            'active' => 'Active',
-            'disable_date' => 'Disable Date',
-            'create_date' => 'Create Date',
+            'active' => 'Activo',
+            'disable_date' => 'Desactivación',
+            'create_date' => 'Creación',
         ];
     }
 
@@ -75,16 +75,27 @@ class Item extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategory()
+    public function getCompany()
     {
-        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+        return $this->hasOne(Company::className(), ['id' => 'company_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCompany()
+    public function getSubcategory()
     {
-        return $this->hasOne(Company::className(), ['id' => 'company_id']);
+        return $this->hasOne(SubCategory::className(), ['id' => 'subcategory_id']);
+    }
+    
+    public function getArrayItem($post,$companyId) 
+    {
+        $array = [];
+        $array['Item']['name'] = $post['Item']['name'];
+        $array['Item']['description'] = $post['Item']['description'];
+        $array['Item']['create_date'] = date('Y-m-d H:i:s');
+        if($companyId != NULL){$array['Item']['company_id'] = $companyId;}else{$array['Item']['company_id'] = $post['Item']['company_id'];}
+        $array['Item']['subcategory_id'] = $post['Item']['subcategory_id'];
+        return $array;
     }
 }

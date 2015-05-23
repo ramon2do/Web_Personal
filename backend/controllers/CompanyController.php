@@ -73,8 +73,7 @@ class CompanyController extends Controller
     public function actionCreate()
     {
         $model = new Company();
-        $model->code_number = $model->getCompanyCode();
-        $this->performAjaxValidation($model);
+        $model->getCompanyCodeNumber();
         
         if(Yii::$app->request->post())
         {
@@ -82,6 +81,7 @@ class CompanyController extends Controller
             $transaction = Yii::$app->db->beginTransaction();
 
             $arrayCompany = $model->getArrayCompany($post);
+            var_dump($arrayCompany);
             if ($model->load($arrayCompany) && $model->save()) 
             {
                 $transaction->commit();
@@ -113,13 +113,15 @@ class CompanyController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->getCompanyCodeNumber();
+        $model->getCompanyCodeList();
         
         if(Yii::$app->request->post())
         {
             $post = Yii::$app->request->post();
             $transaction = Yii::$app->db->beginTransaction();
 
-            $arrayCompany = $model->getArrayCompany($post);
+            $arrayCompany = $model->getArrayCompany($post,$model);
             if ($model->load($arrayCompany) && $model->save()) 
             {
                 $transaction->commit();

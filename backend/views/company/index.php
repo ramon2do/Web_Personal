@@ -47,18 +47,28 @@ $this->title = 'Compañias';
                               ],         
                               [
                                 'class' => 'yii\grid\ActionColumn',
-                                'template' => '{view} {update} {delete} {link}',
+                                'template' => '{view} {update} {delete} {item} {link}',
                                 'buttons' => [
-                                    'view' => function ($url,$model) {
-                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',$url, [
-                                                'id' => 'view',
-                                                'class' => 'modal-show',
-                                            ]);
-                                    },
-                                    'update' => function ($url,$model) {
-                                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>',$url, [
-                                                'id' => 'update',
-                                                'class' => 'modal-show',
+//                                    'view' => function ($url,$model) {
+//                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',$url, [
+//                                                'id' => 'view',
+////                                                'class' => 'modal-show',
+//                                            ]);
+//                                    },
+//                                    'update' => function ($url,$model) {
+//                                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>',$url, [
+//                                                'id' => 'update',
+////                                                'class' => 'modal-show',
+//                                            ]);
+//                                    },
+                                    'item' => function ($url,$model) {
+                                            $url = '/item/create/'.$model->id;
+                                            return Html::a('<span class="glyphicon glyphicon-picture"></span>',$url, [
+//                                                'id' => 'item',
+//                                                'class' => 'modal-show',
+                                                'title' => 'Item',
+                                                'aria-label' => 'Item',
+                                                'data-pjax' => '0',
                                             ]);
                                     },        
                                 ],

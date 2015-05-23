@@ -6,7 +6,7 @@ module.exports = {
     //},
     app: {
         files:{
-            '../../backend/web/css/ribela-app.min.css': ['../../backend/web/css/app.css']
+            '../../backend/web/css/app.min.css': ['../../backend/web/css/app.css']
         }
     }
 };

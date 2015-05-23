@@ -28,6 +28,7 @@ class Account extends \yii\db\ActiveRecord
     public $name_identity;
     public $name_profile;
     public $rol;
+    public $rol_name;
     public $file;
 
     public static function tableName()

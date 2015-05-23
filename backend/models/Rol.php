@@ -58,11 +58,4 @@ class Rol extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Account::className(), ['rol_id' => 'id']);
     }
-    
-    public function getListRol() 
-    {
-        $rol = self::find()->all();
-        $listData = ArrayHelper::map($rol,'id','name');
-        return $listData;
-    }
 }

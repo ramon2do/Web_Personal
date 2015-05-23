@@ -11,6 +11,7 @@ use Yii;
  * @property integer $item_id
  * @property double $price
  * @property integer $quantity
+ * @property string $description
  * @property string $start_date
  * @property string $end_date
  *
@@ -35,6 +36,7 @@ class Inventory extends \yii\db\ActiveRecord
             [['item_id', 'start_date'], 'required'],
             [['item_id', 'quantity'], 'integer'],
             [['price'], 'number'],
+            [['description'], 'string'],
             [['start_date', 'end_date'], 'safe']
         ];
     }
@@ -46,11 +48,12 @@ class Inventory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'item_id' => 'Item ID',
-            'price' => 'Price',
-            'quantity' => 'Quantity',
-            'start_date' => 'Start Date',
-            'end_date' => 'End Date',
+            'item_id' => 'Articulo',
+            'price' => 'Precio (Bs.)',
+            'quantity' => 'Cantidad',
+            'description' => 'Descripción',
+            'start_date' => 'Inicio',
+            'end_date' => 'Final',
         ];
     }
 
@@ -60,5 +63,15 @@ class Inventory extends \yii\db\ActiveRecord
     public function getItem()
     {
         return $this->hasOne(Item::className(), ['id' => 'item_id']);
+    }
+    
+    public function getArrayInventory($post,$itemId) 
+    {
+        $array = [];
+        $array['Inventory']['price'] = $post['Inventory']['price'];
+        $array['Inventory']['quantity'] = $post['Inventory']['quantity'];
+        $array['Inventory']['start_date'] = date('Y-m-d H:i:s');
+        $array['Inventory']['item_id'] = $itemId;
+        return $array;
     }
 }

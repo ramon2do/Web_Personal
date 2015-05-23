@@ -27,7 +27,10 @@ class Company extends \yii\db\ActiveRecord
      */
     
     public $code_number;
-    
+    public $list_sector;
+    public $list_activity;
+    public $list_geoambit;
+
     public static function tableName()
     {
         return 'company';
@@ -89,28 +92,43 @@ class Company extends \yii\db\ActiveRecord
         return $this->hasMany(WorkDay::className(), ['company_id' => 'id']);
     }
     
-    public function getListCompany() 
-    {
-        $company = self::find()->all();
-        $listData = ArrayHelper::map($company,'id','name');
-        return $listData;
-    }
-    
     public function getArrayCompany($post,$model=NULL)
     {
         $array = [];
         $contact_json = NULL;
-        if($model != NULL){$contact_json = $model->contact;}
-        $array['Company']['code'] = $post['Company']['code'];
+        if($model != NULL)
+        {
+            $contact_json = $model->contact;
+            $code = $model->code;
+            $create_date = $model->create_date;
+        }else
+        {
+            $code = $post['Company']['code'];
+            $create_date = date('Y-m-d H:i:s');
+        }
+        $array['Company']['code'] = $code;
         $array['Company']['name'] = $post['Company']['name'];
         $array['Company']['contact'] = Yii::$app->json_manager->getJsonContactCorporative($post['Contact'],$contact_json);
-        $array['Company']['create_date'] = date('Y-m-d H:i:s');
+        $array['Company']['create_date'] = $create_date;
         return $array;
     }
     
-    public function getCompanyCode() 
+    public function getCompanyCodeNumber() 
     {
-        $model = self::findBySql("SELECT coalesce(lpad((substr(code,16)::int +1)::text, 7, '0'), '0000001') as code FROM company ORDER BY code DESC LIMIT 1;")->one();
-        if($model != NULL){return $model->code;}else{return '0000001';}
+        if($this->isNewRecord)
+        {
+            $model = self::findBySql("SELECT coalesce(lpad((substr(code,16)::int +1)::text, 7, '0'), '0000001') as code FROM company ORDER BY code DESC LIMIT 1;")->one();
+            if($model != NULL){$this->code_number = $model->code;}else{$this->code_number = '0000001';}
+        }else{$this->code_number = substr($this->code, 15);}
+    }
+    
+    public function getCompanyCodeList() 
+    {
+        if(!$this->isNewRecord)
+        {
+            $this->list_sector = strtolower(substr($this->code, 0, 4));
+            $this->list_activity = strtolower(substr($this->code, 5, 4));
+            $this->list_geoambit = strtolower(substr($this->code, 10, 4));
+        }
     }
 }

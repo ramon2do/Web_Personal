@@ -141,6 +141,7 @@ class JsonManager extends Component
     {
         $array = [
             'corporate_address' => '',
+            'coordinates' => '',
             'corporate_phone' => '',
             'corporate_mobile_phone' => '',
             'corporate_email' => '',
@@ -170,19 +171,19 @@ class JsonManager extends Component
         $arrayMenu = [];
         $arrayMenu[1] = [
             ['label' => '<i class="fa fa-home"></i> Inicio', 'url' => ['/'], 'options' => ['class'=>'']],
-            ['label' => '<i class="fa fa-home"></i> Compañias', 'url' => ['/company/'], 'options' => ['class'=>'treeview']],
-            ['label' => '<i class="fa fa-home"></i> Inventarios', 'url' => ['/'], 'options' => ['class'=>'treeview']],
-            ['label' => '<i class="fa fa-home"></i> Cuentas', 'url' => ['/account/'], 'options' => ['class'=>'treeview']],
+            ['label' => '<i class="fa fa-fw fa-building"></i> Compañias', 'url' => ['/company/'], 'options' => ['class'=>'treeview']],
+            ['label' => '<i class="fa fa-book"></i> Inventarios', 'url' => ['/item/'], 'options' => ['class'=>'treeview']],
+            ['label' => '<i class="fa fa-users"></i> Cuentas', 'url' => ['/account/'], 'options' => ['class'=>'treeview']],
         ];
         $arrayMenu[2] = [
-            ['label' => '<i class="fa fa-home"></i> Inicio', 'url' => ['/site/index'], 'options' => ['class'=>'']],
+            ['label' => '<i class="fa fa-home"></i> Inicio', 'url' => ['/site/'], 'options' => ['class'=>'']],
             ['label' => '<i class="fa fa-home"></i> Compañias', 'url' => ['/'], 'options' => ['class'=>'']],
             ['label' => '<i class="fa fa-home"></i> Productos/Servicios', 'url' => ['/'], 'options' => ['class'=>'']],
         ];
         $arrayMenu[3] = [
-            ['label' => '<i class="fa fa-home"></i> Inicio', 'url' => ['/site/index'], 'options' => ['class'=>'']],
-            ['label' => '<i class="fa fa-home"></i> Mi Compañia', 'url' => ['/company/'], 'options' => ['class'=>'treeview']],
-            ['label' => '<i class="fa fa-home"></i> Mi Inventario', 'url' => ['/'], 'options' => ['class'=>'treeview']],
+            ['label' => '<i class="fa fa-home"></i> Inicio', 'url' => ['/inventory/list'], 'options' => ['class'=>'']],
+            ['label' => '<i class="fa fa-fw fa-building""></i> Mi Compañia', 'url' => ['/company/'.Yii::$app->session->get('user.company_id')], 'options' => ['class'=>'treeview']],
+            ['label' => '<i class="fa fa-book"></i> Mi Inventario', 'url' => ['/item/list'], 'options' => ['class'=>'treeview']],
         ];
         return $arrayMenu;
     }

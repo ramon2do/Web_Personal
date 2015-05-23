@@ -60,23 +60,22 @@ $this->title = 'Cuentas';
                                       return $create_date;
                                   },
                               ],            
-                              [
-                                'class' => 'yii\grid\ActionColumn',
+                              ['class' => 'yii\grid\ActionColumn',
                                 'template' => '{view} {update} {delete} {link}',
-                                'buttons' => [
-                                    'view' => function ($url,$model) {
-                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',$url, [
-                                                'id' => 'view',
-                                                'class' => 'modal-show',
-                                            ]);
-                                    },
-                                    'update' => function ($url,$model) {
-                                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>',$url, [
-                                                'id' => 'update',
-                                                'class' => 'modal-show',
-                                            ]);
-                                    },        
-                                ],
+//                                'buttons' => [
+//                                    'view' => function ($url,$model) {
+//                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',$url, [
+//                                                'id' => 'view',
+////                                                'class' => 'modal-show',
+//                                            ]);
+//                                    },
+//                                    'update' => function ($url,$model) {
+//                                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>',$url, [
+//                                                'id' => 'update',
+////                                                'class' => 'modal-show',
+//                                            ]);
+//                                    },        
+//                                ],
                             ],
                           ],
                           'tableOptions' => [

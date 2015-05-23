@@ -24,9 +24,7 @@ $this->title = 'Cuenta Detalle';
           <div class="col-sm-12">
               <div class="panel panel-default">
                   <div class="panel-body">
-                    <?php Pjax::begin(['enablePushState' => false]); ?>
                     <p>
-                        <img id="preview_avatar" src="<?= $model->getAvatar($model->id) ?>" class="img-circle" alt="Mi Avatar" style="width: 45px; height: 45px;"/>
                         <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
                             'class' => 'btn btn-danger',
@@ -35,7 +33,8 @@ $this->title = 'Cuenta Detalle';
                                 'method' => 'post',
                             ],
                         ]) ?>
-                    </p>
+                    </p>  
+                    <?php Pjax::begin(['enablePushState' => false]); ?>
                     <?= DetailView::widget([
                         'model' => $model,
                         'attributes' => [
